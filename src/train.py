@@ -78,7 +78,12 @@ with sessionSetup(cmdArgs) as sess:
 	else:
 		sess.run(tf.initialize_all_variables())
 
-	trainingData.dataQueuer.start_queueing(sess)
+	# trainingData.dataQueuer.start_queueing(sess)
+	sess.run(tf.global_variables_initializer())
+	sess.run(tf.local_variables_initializer())
+	coord = tf.train.Coordinator()
+	threads = tf.train.start_queue_runners(sess=sess,
+											coord=coord)
 
 	#start summary writer
 	summary_writer = tf.summary.FileWriter(logPath, sess.graph)
