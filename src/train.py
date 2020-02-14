@@ -48,6 +48,10 @@ resume, startIteration, snapshotFiles = checkResume(snapshotPath,logPath, cmdArg
 # build graph
 with tf.device("/gpu:"+str(cmdArgs.gpu)):
 	trainingData = TrainingData(batchSize,instanceParams)
+	# trainingData = FlyingObjectInput(batchSize,instanceParams)
+
+import ipdb; ipdb.set_trace()
+
 with tf.device("/gpu:"+str(cmdArgs.gpu)):
 	# init
 	with tf.variable_scope("netShare"):
