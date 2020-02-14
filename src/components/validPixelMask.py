@@ -13,7 +13,8 @@ def validPixelMask(lossShape, borderPercentH,borderPercentW):
 
 		innerHeight = height - 2*borderThicknessH
 		innerWidth = width - 2*borderThicknessW
-
+		
+		# import ipdb; ipdb.set_trace()
 		topBottom = tf.zeros(tf.stack([batchSize,borderThicknessH,innerWidth,channels]))
 		leftRight = tf.zeros(tf.stack([batchSize,height,borderThicknessW,channels]))
 		center = tf.ones(tf.stack([batchSize,innerHeight,innerWidth,channels]))

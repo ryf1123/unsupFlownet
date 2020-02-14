@@ -9,19 +9,24 @@ import os
 
 class FlyingObjectInput():
     def __init__(self,batchSize,instanceParams,shuffle=True):
-
+		self.batch_size = batchSize
 		borderThicknessH = instanceParams["borderThicknessH"]
 		borderThicknessW = instanceParams["borderThicknessW"]
 
-		assert borderThicknessH == 64
-		assert borderThicknessW == 64
+		# from termcolor import colored
+		# print(colored("changing image size to 64", "green"))
+		# borderThicknessH, borderThicknessW = 64, 64
+		# assert borderThicknessH == 64
+		# assert borderThicknessW == 64
         
 		self.data = self.load_data()
 		batch = self.first1k_train()
 		## queuing complete
-
+		# import ipdb; ipdb.set_trace()
 		# mean subtraction
 		mean = [[[[0.448553, 0.431021, 0.410602]]]]
+
+		# print(img0raw)
 		img0raw = tf.cast(batch[0],tf.float32)/255.0 - mean
 		img1raw = tf.cast(batch[1],tf.float32)/255.0 - mean
 
@@ -129,7 +134,7 @@ class FlyingObjectInput():
         return tf.train.batch(
             [im1, im2],
             batch_size=self.batch_size,
-            num_threads=self.num_threads,
+            # num_threads=self.num_threads,
             allow_smaller_final_batch=False)
     
 #     def first1k_test(self, offset=None):
@@ -203,6 +208,7 @@ class TrainingData:
 			batch = self.dataQueuer.queue.dequeue_many(batchSize)
 
 			## queuing complete
+			import ipdb; ipdb.set_trace() 
 
 			# mean subtraction
 			mean = [[[[0.448553, 0.431021, 0.410602]]]]
